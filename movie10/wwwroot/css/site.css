@@ -1,0 +1,113 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Rubik+Bubbles&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One:ital@0;1&family=Archivo+Narrow:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Fredoka:wght@400;500;600&family=Gabarito:wght@400;500;600;800&family=Hind+Madurai:wght@300;400&family=Paytone+One&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Fredoka:wght@400;500;600&family=Lobster&display=swap');
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+body {
+    background-color: purple;
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+
+h1 {
+    width: auto;
+    height: auto;
+    text-align: center;
+    color: pink;
+    font-family: 'Lobster', sans-serif;
+}
+#movie a {
+    text-decoration: none;
+}
+#movie a h2 {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-weight: bold;
+    font-size: 42px;
+    color: white;
+    border: 3px solid grey;
+    border-radius: 0.5%;
+    background-color: mediumorchid;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    height: auto;
+    box-shadow: 10px 10px 10px grey;
+    margin-top: 20px;
+}
+#header {
+    width: 100%;
+    background: purple;
+    text-align: center;
+    display: flex;
+    box-shadow: 10px 5px 5px red;
+}
+
+   
+
+        #movie a h2:hover {
+            color: hotpink;
+        }
+
+
+#aboutMovie {
+    display: flex;
+    justify-content: center;
+   
+}
+
+    #aboutMovie div a img {
+        width: 250px;
+        height: 350px;
+        border: 2px solid black;
+        margin: 20px;      
+        cursor: pointer;
+    }
+
+
+    #aboutMovie div ul {
+        margin-top: 20px;
+        list-style: none;
+        width: 600px;
+        height:auto;
+    }
+
+        #aboutMovie div ul li div {
+            display: flex;
+            justify-content: flex-start;
+            color: white;
+        }
+
+            #aboutMovie div ul li div h4 {
+                font-size: 20px;
+                padding: 0px 10px 0px 0px;
+            }
+
+            #aboutMovie div ul li div p {
+                font-size: 18px;
+                flex-wrap: wrap;
+            }
+
+        #aboutMovie div ul li:nth-child(3) p {
+            width: 350px;
+        }
+
+        #aboutMovie div ul li:nth-child(4) p {
+            width: 450px;
+            height: 150px;
+            
+            font-size:16px;
+        }
+
+

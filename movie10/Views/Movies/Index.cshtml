@@ -1,0 +1,58 @@
+﻿@model IEnumerable<movie10.Models.Movie>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>10 хороших фильмов</h1>
+
+
+
+@foreach (var item in Model) {
+    <section id="movie">
+        <a asp-action="Details" asp-route-id="@item.Id"> 
+            <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+            </a> 
+       
+            <section id="aboutMovie">
+                <div>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                         <img src="@Html.DisplayFor(modelItem => item.Poster)" />
+                    </a>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <div>
+                                <h4>Год выпуска:</h4>
+                                <p>@Html.DisplayFor(modelItem => item.Year)</p> @* год *@
+                            </div>
+                        </li>
+                    <li>
+                        <div>
+                            <h4>Режиссер: </h4>
+                            <p>@Html.DisplayFor(modelItem => item.Director)</p> @* режиссер *@
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <h4>Жанр: </h4>
+                            <p>@Html.DisplayFor(modelItem => item.Genre)</p> @* жанр *@
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <p>@Html.DisplayFor(modelItem => item.Description)</p> @* описание *@
+                        </div>
+                    </li>
+                    </ul>
+                </div>
+            </section>
+    </section>
+}
+
+
+
+
+
