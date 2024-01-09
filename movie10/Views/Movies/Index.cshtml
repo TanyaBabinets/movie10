@@ -6,7 +6,9 @@
 }
 
 <h1>10 хороших фильмов</h1>
-
+<div id="create">
+    <a asp-action="Create">Добавить фильм </a>
+</div>
 
 
 @foreach (var item in Model) {
@@ -26,28 +28,43 @@
                         <li>
                             <div>
                                 <h4>Год выпуска:</h4>
-                                <p>@Html.DisplayFor(modelItem => item.Year)</p> @* год *@
+                                <p>@Html.DisplayFor(modelItem => item.Year)</p> 
                             </div>
                         </li>
                     <li>
                         <div>
                             <h4>Режиссер: </h4>
-                            <p>@Html.DisplayFor(modelItem => item.Director)</p> @* режиссер *@
+                            <p>@Html.DisplayFor(modelItem => item.Director)</p> 
                         </div>
                     </li>
                     <li>
                         <div>
                             <h4>Жанр: </h4>
-                            <p>@Html.DisplayFor(modelItem => item.Genre)</p> @* жанр *@
+                            <p>@Html.DisplayFor(modelItem => item.Genre)</p> 
                         </div>
                     </li>
                     <li>
                         <div>
-                            <p>@Html.DisplayFor(modelItem => item.Description)</p> @* описание *@
+                            <p>@Html.DisplayFor(modelItem => item.Description)</p> 
                         </div>
                     </li>
+                    <li></li>
+                    <li><div id="button1">
+
+                        <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a>
+                    </div><li/>
                     </ul>
                 </div>
+               
+              
+
+            <div id="buttons">  <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> </div>
+
+            <div id ="buttons">
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+              
+            </div>
+            
             </section>
     </section>
 }

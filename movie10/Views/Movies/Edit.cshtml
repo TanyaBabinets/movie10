@@ -5,59 +5,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Изменить</h1>
 
-<h4>Movie</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+                <label asp-for="Title" class="labels" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TitleEng" class="control-label"></label>
+                <label asp-for="TitleEng" class="labels" class="control-label"></label>
                 <input asp-for="TitleEng" class="form-control" />
                 <span asp-validation-for="TitleEng" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Genre" class="control-label"></label>
+                <label asp-for="Genre" class="labels" class="control-label"></label>
                 <input asp-for="Genre" class="form-control" />
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Director" class="control-label"></label>
+                <label asp-for="Director" class="labels" class="control-label"></label>
                 <input asp-for="Director" class="form-control" />
                 <span asp-validation-for="Director" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
+                <label asp-for="Year" class="labels" class="control-label"></label>
                 <input asp-for="Year" class="form-control" />
                 <span asp-validation-for="Year" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="labels" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Poster" class="control-label"></label>
+                <label asp-for="Poster" class="labels" class="control-label"></label>
                 <input asp-for="Poster" class="form-control" />
                 <span asp-validation-for="Poster" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+            <div>
+                <img id="PosterAdd" style="width: 250px;
+                           height: 350px" src="@Model.Poster" />
+                <div id="FileAdd">
+
+                    <input type="file" name="uploadedFile" id="AddPoster" class="form-control" ; accept=".jpg" value="@Model.Poster" />
+                    <span asp-validation-for="Poster" class="text-danger" style="margin-left: 50px;"></span>
+                  
+                </div>
+                <div class="form-group">
+
+                    <input type="submit" value="Сохранить" id="buttons" asp-route-id="@Model.Id" class="buttons" />
+                </div>
+               
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div id="buttons">
+    <a asp-action="Index" style="margin-left:2px">Назад</a>
 </div>
 
 @section Scripts {

@@ -28,6 +28,9 @@ h1 {
     color: pink;
     font-family: 'Lobster', sans-serif;
 }
+h3 {
+    color: white;
+}
 #movie a {
     text-decoration: none;
 }
@@ -104,10 +107,89 @@ h1 {
         }
 
         #aboutMovie div ul li:nth-child(4) p {
-            width: 450px;
+            width: 550px;
             height: 150px;
             
             font-size:16px;
         }
+        #aboutMovie div ul li #button1 {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 40px;
+            color: white;
+            border: 3px solid grey;
+            border-radius: 0.5%;
+            background-color: mediumorchid;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 10px 10px 10px grey;
+        }
+#buttons {
+    margin-top: 10px;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 40px;
+    color: white;
+    border: 3px solid grey;
+    border-radius: 0.5%;
+    background-color: mediumorchid;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 10px 10px 10px grey;
 
+}
+.buttons {
+    margin-top:5px;
+    margin-bottom:5px;
+    width: 200px; height: 40px;
+    color: white;
+    border: 3px solid grey;
+    border-radius: 0.5%;
+    background-color: mediumorchid;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 10px 10px 10px grey;
+}
+#button1 a {
+    color: white;
+    text-decoration: none;
+}
+#buttons a {
+    color: white;
+    text-decoration: none;
+}
+.labels {
+color:white;
+}
+#create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 40px;
+    color: white;
+    border: 3px solid grey;
+    border-radius: 0.5%;
+    background-color: mediumorchid;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 10px 10px 10px grey;
+}
+    #create a {
+    color:white;
+    text-decoration:none;
+    }
+hr {
+    border-color: white;
+    border-width: 2px;
+}
+#detaly {
+color:white;
+}
 
