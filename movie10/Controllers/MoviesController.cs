@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Elfie.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using movie10.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace movie10.Controllers
@@ -53,26 +55,59 @@ namespace movie10.Controllers
         // POST: Movies/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        public bool MovieExists(string? title, int? year, string? director)////ДОБАВЛЕНО
+        {
+            // Проверяем, есть ли фильм с такими же title, year и director в базе данных
+            return _context.Movies.Any(m =>
+                m.Title == title &&
+                m.Year == year &&
+                m.Director == director);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(IFormFile uploadedFile, [Bind("Id,Title,TitleEng,Genre,Director,Year,Description,Poster")] Movie movie)
         {
             if (ModelState.IsValid)
             {
+                if (MovieExists(movie.Title, movie.Year, movie.Director))
+                {
+                    ///ДОБАВЛЕНО. РАБОТАЕТ
+                    return View("~/Views/Movies/Error.cshtml", "Ошибочка вышла");
+                }
+            //C: \Users\User\source\repos\movie10\movie10\Views\Movies\Error.cshtml
                 if (uploadedFile != null)
                 {
                     // Путь к папке Files
                     string path = "/img/" + uploadedFile.FileName; // имя файла
-                   
-                    // Сохраняем файл в папку Files в каталоге wwwroot
-                    // Для получения полного пути к каталогу wwwroot
-                    // применяется свойство WebRootPath объекта IWebHostEnvironment
+
                     using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                     {
                         await uploadedFile.CopyToAsync(fileStream); // копируем файл в поток
                     }
                     movie.Poster = path;
                 }
+                // Проверка формата файла постера
+                if (movie.Poster != null)
+                {
+                    var format = new[] { ".jpg", ".jpeg" };
+                    var fileFormat = Path.GetExtension(movie.Poster).ToLower();
+
+                    if (!format.Contains(fileFormat))
+                    {
+                        ModelState.AddModelError("Poster", "Допускаются только файлы с расширением .jpg или .jpeg");
+                        return View(movie);
+                    }
+                    var maxFileSizeInBytes = 2 * 1024 * 1024; // ограничение до 2MB
+                    if (movie.Poster.Length > maxFileSizeInBytes)
+                    {
+                        ModelState.AddModelError("Poster", "Превышен максимально допустимый размер файла.");
+                        return View(movie);
+
+                    }
+                }
+
                 _context.Movies.Add(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,7 +122,7 @@ namespace movie10.Controllers
             {
                 return NotFound();
             }
-           
+
             var movie = await _context.Movies.FindAsync(id);
             if (movie == null)
             {
@@ -101,7 +136,7 @@ namespace movie10.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit( int id, [Bind("Id,Title,TitleEng,Genre,Director,Year,Description,Poster")] Movie movie, IFormFile? uploadedFile)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,TitleEng,Genre,Director,Year,Description,Poster")] Movie movie, IFormFile? uploadedFile)
         {
             if (id != movie.Id)
             {
@@ -122,13 +157,34 @@ namespace movie10.Controllers
                     movie.Poster = path;
 
                 }
-                else 
+                else
                 {
                     movie.Poster = (from m in _context.Movies where m.Id == id select m).FirstOrDefault().Poster; //оставляем прежний постер 
                 }
-                    _context.Update(movie);
-                    await _context.SaveChangesAsync();
-                            
+
+                // Проверка формата файла постера
+                if (movie.Poster != null)
+                {
+                    var format = new[] { ".jpg", ".jpeg" };
+                    var fileFormat = Path.GetExtension(movie.Poster).ToLower();
+
+                    if (!format.Contains(fileFormat))
+                    {
+                        ModelState.AddModelError("Poster", "Допускаются только файлы с расширением .jpg или .jpeg");
+                        return View(movie);
+                    }
+                    var maxFileSizeInBytes = 2 * 1024 * 1024; // ограничение до 2MB
+                    if (movie.Poster.Length > maxFileSizeInBytes)
+                    {
+                        ModelState.AddModelError("Poster", "Превышен максимально допустимый размер файла.");
+                        return View(movie);
+
+                    }
+                }
+
+                _context.Update(movie);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(movie);
@@ -167,10 +223,5 @@ namespace movie10.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
-        {
-            return _context.Movies.Any(e => e.Id == id);
-        }
-       
     }
 }
